@@ -45,7 +45,7 @@ class OurTeamAdmin(admin.ModelAdmin):
 
 class PhotoAdmin(admin.TabularInline):
     model = Photo
-    raw_id_fields = 'gallery'
+    raw_id_fields = ('gallery', )
 
 
 @admin.register(Gallery)
