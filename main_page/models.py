@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import  RegexValidator
 
 
 class Category(models.Model):
@@ -78,6 +79,7 @@ class Photo(models.Model):
 
 
 class TableReserv(models.Model):
+
     user_name = models.CharField(max_length=50, db_index=True)
     user_email = models.EmailField(max_length=254)
     user_phone = models.CharField(max_length=50)

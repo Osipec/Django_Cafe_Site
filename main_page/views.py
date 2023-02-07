@@ -9,4 +9,5 @@ def main_page(request):
     return render(request, 'main_page.html', context={
         'categories': categories,
         'dishes': dishes,
+        'special_dishes': special_dishes,
     })
