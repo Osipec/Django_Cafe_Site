@@ -25,8 +25,8 @@ class DishAllAdmin(admin.ModelAdmin):
 
 @admin.register(TableReserv)
 class TableReservAdmin(admin.ModelAdmin):
-    list_display = ['user_name', 'user_email', 'user_phone', 'date', 'time', 'number_of_people', 'message']
-    list_editable = ['date', 'time', 'number_of_people', 'message']
+    list_display = ['user_name', 'user_phone', 'date', 'time', 'number_of_people', 'message', 'processed', 'date_of_reserv']
+    list_editable = ['date', 'time', 'number_of_people', 'message', 'processed']
     list_filter = ['date', 'time']
 
 

@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import  RegexValidator
+from django.core.validators import RegexValidator
 
 
 class Category(models.Model):
@@ -79,20 +79,23 @@ class Photo(models.Model):
 
 
 class TableReserv(models.Model):
-
+    phone_validator = RegexValidator(regex=r'^\+?3?8?0\d{2}[- ]?(\d[ -]?){7}$', message="Wrong number")
     user_name = models.CharField(max_length=50, db_index=True)
-    user_email = models.EmailField(max_length=254)
-    user_phone = models.CharField(max_length=50)
-    date = models.DateField()
-    time = models.TimeField()
+    user_email = models.CharField(max_length=50)
+    user_phone = models.CharField(max_length=20, validators=[phone_validator])
+    date = models.CharField(max_length=20)
+    time = models.CharField(max_length=20)
     number_of_people = models.SmallIntegerField()
     message = models.CharField(blank=True, max_length=255)
+    processed = models.BooleanField(default=False)
+    date_of_reserv = models.DateField(auto_now_add=True)
+    date_processed = models.DateField(auto_now=True)
 
     def __str__(self):
         return f'{self.date} ({self.time}): {self.user_name}'
 
     class Meta:
-        ordering = ('date', 'time')
+        ordering = ('-date', 'time')
 
 
 class OurTeam(models.Model):
