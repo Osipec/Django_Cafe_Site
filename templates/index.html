@@ -65,13 +65,29 @@
           <li><a class="nav-link scrollto" href="#events">Events</a></li>
           <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href={% url 'login_view' %}>Login</a></li>
-              <li><a href={% url 'logout_view' %}>Logout</a></li>
-              <li><a href={% url 'registration_view' %}>Registration</a></li>
-            </ul>
-          </li>
+            {% if not user_auth %}
+                <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href={% url 'login_view' %}>Login</a></li>
+                        <li><a href={% url 'registration_view' %}>Registration</a></li>
+                        <li><a href={% url 'logout_view' %}>Logout</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href={% url 'logout_view' %}>Logout</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if user_manager %}
+                <li class="dropdown"><a href="#"><span>Manager</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href={% url 'main_page:list_reservations' %}>Reservations</a></li>
+                        <li><a href={% url 'logout_view' %}>Logout</a></li>
+                    </ul>
+                </li>
+            {% endif %}
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
