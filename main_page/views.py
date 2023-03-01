@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Category, Dish, TableReserv
+from .models import Category, Dish, TableReserv, Photo, OurTeam
 from .forms import ReservationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -21,6 +21,8 @@ def main_page(request):
     reservation_form = ReservationForm()
     user_manager = request.user.groups.filter(name='manager').exists()
     user_auth = request.user.is_authenticated
+    photo_gallery = Photo.objects.filter(is_visible=True)
+    our_team = OurTeam.objects.filter(is_visible=True)
 
     return render(request, 'main_page.html', context={
         'categories': categories,
@@ -28,7 +30,9 @@ def main_page(request):
         'special_dishes': special_dishes,
         'reservation_form': reservation_form,
         'user_manager': user_manager,
-        'user_auth': user_auth
+        'user_auth': user_auth,
+        'photo_gallery': photo_gallery,
+        'our_team': our_team,
     })
 
 
